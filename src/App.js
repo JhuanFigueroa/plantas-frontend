@@ -13,6 +13,8 @@ import Header from "./components/Header";
 import Categoria from "./containers/Categoria";
 import Succes from "./components/Succes";
 import Login from "./components/Login";
+import Admin from "./components/Admin";
+import FormPlanta from "./components/FormPlanta";
 function App() {
   const initialState=UseInitialState();
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path={"/checkout"} element={<Checkout/>}/>
             <Route path={"/categoria/:id"} element={<Categoria/>}/>
             <Route path={"/succes"} element={<Succes/>}/>
+            <Route path={"/admin"} element={<Admin/>}/>
+            <Route path={"/formPlanta"} element={<FormPlanta/>}/>
           </Routes>
         </Layout>
       </BrowserRouter>

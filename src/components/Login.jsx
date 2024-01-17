@@ -20,7 +20,12 @@ const Login = () => {
 
         const rta = await axios.post("http://localhost:5000/login", data);
         saveClient(rta.data);
-        navigate("/home");
+
+        if (rta.data.rol===1){
+            navigate("/home");
+        }else{
+            navigate("/admin");
+        }
     };
 
     return (

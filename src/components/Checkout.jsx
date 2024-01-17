@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import OrderItem from "../components/OrderItem";
 import "../styles/Checkout.css";
 import AppContext from "../context/AppContext";
@@ -10,6 +10,9 @@ const Checkout = () => {
     const { state } = React.useContext(AppContext);
     const {clearCart}=React.useContext(AppContext);
     const navigate=useNavigate();
+    const [toggleNota,setToggleNota]=useState(false);
+    const [monto,setMonto]=useState(0);
+    const [cambio,setCambio]=useState(0);
     const sumTotal = () => {
         const reducer = (accumulator, currentValue) =>
             accumulator + (currentValue.precio*currentValue.cantidad);
@@ -18,6 +21,7 @@ const Checkout = () => {
     };
 
     const pagar=async () => {
+
         const venta = {
             cliente: state.cliente.id
         }
@@ -43,11 +47,36 @@ const Checkout = () => {
          clearCart();
          navigate("/succes");
     }
+    const mostrarNota=()=>{
+        const sum=monto-sumTotal();
+        setCambio(sum);
+        setToggleNota(true);
+    }
+
+    const montoChange=(e)=>{
+        setMonto(e.target.value)
+    }
     return (
         <div className="Checkout">
-            <div className="Checkout-container">
-                <h1 className="title">My Orden</h1>
-                <div className="Checkout-content">
+            <div>
+                <label htmlFor="monto" className="label">
+                    Monto
+                </label>
+                <input
+                    type="number"
+                    name="monto"
+                    placeholder="$$"
+                    value={monto}
+                    className="input input-email"
+                    onChange={montoChange}
+                />
+                <button className="primary-button" onClick={()=>mostrarNota()}>Pagar</button>
+            </div>
+
+            {toggleNota && (
+                <div className="Checkout-container">
+                    <h1 className="title">My Orden</h1>
+                    <div className="Checkout-content">
 
                         {state.cart.map((product) => (
                             <div className="order">
@@ -57,11 +86,14 @@ const Checkout = () => {
                             </div>
 
                         ))}
-                    <p><strong>Total $:</strong> {sumTotal()}</p>
-                    <button className="primary-button" onClick={()=>pagar()}>Pagar</button>
+                        <p><strong>Total $:</strong> {sumTotal()}</p>
+                        <p><strong>Monto $:</strong> {monto}</p>
+                        <p><strong>Cambio $:</strong> {cambio}</p>
+                        <button className="primary-button" onClick={()=>pagar()}>Terminar</button>
 
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

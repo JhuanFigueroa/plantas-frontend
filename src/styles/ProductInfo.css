@@ -34,6 +34,19 @@
 	font-weight: bold;
 	height: 50px;
 }
+
+.secondary-button {
+	background-color: var(--hospital-green);
+	border-radius: 8px;
+	border: none;
+	color: var(--white);
+	width: 50%;
+	cursor: pointer;
+	font-size: var(--md);
+	font-weight: bold;
+	height: 30px;
+}
+
 .add-to-cart-button {
 	display: flex;
 	align-items: center;
