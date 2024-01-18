@@ -15,6 +15,7 @@ import Succes from "./components/Succes";
 import Login from "./components/Login";
 import Admin from "./components/Admin";
 import FormPlanta from "./components/FormPlanta";
+import Comprar from "./components/Comprar";
 function App() {
   const initialState=UseInitialState();
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path={"/"} element={<Login/>}/>
             <Route path={"/home"} element={<Home/>}/>
             <Route path={"/checkout"} element={<Checkout/>}/>
+            <Route path={"/comprar"} element={<Comprar/>}/>
             <Route path={"/categoria/:id"} element={<Categoria/>}/>
             <Route path={"/succes"} element={<Succes/>}/>
             <Route path={"/admin"} element={<Admin/>}/>

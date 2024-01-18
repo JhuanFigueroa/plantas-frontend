@@ -23,7 +23,7 @@ const MyOrder = () => {
             </div>
             <div className="my-order-content">
                 {state.cart.map((product) => (
-                    <OrderItem product={product} key={`orderItem-${product.id}`} />
+                    product.cantidad>0 && <OrderItem product={product} key={`orderItem-${product.id}`} />
                 ))}
 
                 <div className="order">
@@ -33,7 +33,9 @@ const MyOrder = () => {
                     <p>${sumTotal()}</p>
                 </div>
 
-                <Link to={'/checkout'}> <button className="primary-button">Checkout</button></Link>
+                {state.cliente.rol==1?(
+                    <Link to={'/checkout'}> <button className="primary-button">Checkout</button></Link>
+                ):( <Link to={'/comprar'}> <button className="primary-button">Comprar</button></Link>)}
             </div>
         </aside>
     );

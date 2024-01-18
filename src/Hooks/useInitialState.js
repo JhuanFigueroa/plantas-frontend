@@ -3,6 +3,7 @@ import React from "react";
 const initalState = {
     cart: [],
     cliente:{},
+    products:[],
 };
 
 const useInitialState = () => {
@@ -31,18 +32,26 @@ const useInitialState = () => {
         });
     };
 
-    const removeFromCart = (payload) => {
+    const removeFromCart = (payload, quantityToRemove) => {
         const updatedCart = [...state.cart];
+        const indexToRemove = updatedCart.findIndex(item => item.id === payload.id);
 
-        if (updatedCart.length > 0) {
-
-            updatedCart.pop();
+        if (indexToRemove !== -1) {
+            // Si la cantidad a eliminar es menor o igual a la cantidad en el carrito, restarla
+            if (quantityToRemove <= updatedCart[indexToRemove].cantidad) {
+                updatedCart[indexToRemove].cantidad -= quantityToRemove;
+            } else {
+                // Si la cantidad a eliminar es mayor, eliminar completamente el producto del carrito
+                updatedCart.splice(indexToRemove, 1);
+            }
         }
+
         setState({
             ...state,
             cart: updatedCart,
         });
     };
+
     const clearCart = () => {
         setState({
             ...state,
@@ -56,13 +65,20 @@ const useInitialState = () => {
             cliente: clientInfo,
         });
     };
+    const setProducts=(payload)=>{
+        setState({
+            ...state,
+            products: payload,
+        })
+    }
 
     return {
         state,
         addToCart,
         removeFromCart,
         clearCart,
-        saveClient
+        saveClient,
+        setProducts,
     };
 };
 

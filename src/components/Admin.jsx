@@ -7,14 +7,13 @@ import {Link} from "react-router-dom";
 import AppContext from "../context/AppContext";
 
 const Admin=()=>{
-
+    const {setProducts}=React.useContext(AppContext);
     const {addToCart}=React.useContext(AppContext);
+    const {state}=React.useContext(AppContext);
     const handleClick=(item)=>{
-        item.existencias-=1;
+        item.existencias+=1;
         addToCart(item);
     }
-
-    const[products,setProducts]=useState([]);
     const getProducts=async () => {
         const res = await axios.get("http://localhost:5000/plantas");
         setProducts(res.data);
@@ -26,7 +25,7 @@ const Admin=()=>{
         <section className="main-container">
             <Link to={'/formPlanta'}> <button className="primary-button">Agregar</button></Link>
             <div className="ProductList">
-                {products.map(product=> (
+                {state.products.map(product=> (
                     <div className="ProductItem">
                         <img
                             src=""
@@ -37,8 +36,8 @@ const Admin=()=>{
                                 <p>{product.nombre}</p>
                                 <p>${product.precio}</p>
                                 <p>cantidad:{product.existencias}</p>
-                                <p>stock min:{product.stock_min}</p>
-                                <p>cantidad:{product.stock_max}</p>
+                                <p>Stock min:{product.stock_min}</p>
+                                <p>Stock max:{product.stock_max}</p>
                             </div>
 
                         </div>
