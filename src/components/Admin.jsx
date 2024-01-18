@@ -42,7 +42,7 @@ const Admin=()=>{
 
                         </div>
                         <div>
-                        <button className="secondary-button"  onClick={()=>handleClick(product)}>Comprar</button>
+                            {product.existencias!=product.stock_max && (<button className="secondary-button"  onClick={()=>handleClick(product)}>Comprar</button>)}
                     </div>
 
                     </div>
