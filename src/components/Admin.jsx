@@ -28,7 +28,7 @@ const Admin=()=>{
                 {state.products.map(product=> (
                     <div className="ProductItem">
                         <img
-                            src=""
+                            src={product.imagen} // Ajusta el tipo de imagen según tu necesidad
                             alt={product.nombre}
                         />
                         <div className="product-info">
