@@ -16,6 +16,7 @@ import Login from "./components/Login";
 import Admin from "./components/Admin";
 import FormPlanta from "./components/FormPlanta";
 import Comprar from "./components/Comprar";
+import ProductList from "./containers/ProductList";
 function App() {
   const initialState=UseInitialState();
   return (
@@ -26,7 +27,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path={"/"} element={<Login/>}/>
-            <Route path={"/home"} element={<Home/>}/>
+            <Route path={"/home"} element={<ProductList/>}/>
             <Route path={"/checkout"} element={<Checkout/>}/>
             <Route path={"/comprar"} element={<Comprar/>}/>
             <Route path={"/categoria/:id"} element={<Categoria/>}/>

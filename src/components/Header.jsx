@@ -20,43 +20,45 @@ const Header=()=>{
     React.useEffect(() => {
         getCategories();
     }, []);
-    return (
-        <nav>
-            <img src={menu} alt="menu" className="menu" />
+    if (state.cliente.rol>0){
+        return (
+            <nav>
+                <img src={menu} alt="menu" className="menu" />
 
-            <div className="navbar-left">
-                <img src={logo} alt="logo" className="nav-logo" />
+                <div className="navbar-left">
+                    <img src={logo} alt="logo" className="nav-logo" />
 
-                <ul>
-                    <li>
-                        <a href="/home">All</a>
-                    </li>
-                    {categorias.map((categoria) => (
+                    <ul>
                         <li>
-                            <Link to={`/categoria/${categoria.id}`}>{categoria.nombre}</Link>
+                            <Link to="/home">All</Link>
                         </li>
-                    ))}
-                </ul>
-            </div>
+                        {categorias.map((categoria) => (
+                            <li>
+                                <Link to={`/categoria/${categoria.id}`}>{categoria.nombre}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            <div className="navbar-right">
-                <ul>
-                    <li className="navbar-email">
-                        {state.cliente.correo}
-                    </li>
-                    <li
-                        className="navbar-shopping-cart"
-                        onClick={() => setToggleOrders(!toggleOrders)}
-                    >
-                        <img src={shopingCar} alt="shopping cart" />
-                        {state.cart.length > 0 ? <div>{state.cart.length}</div> : null}
-                    </li>
-                </ul>
-            </div>
+                <div className="navbar-right">
+                    <ul>
+                        <li className="navbar-email">
+                            {state.cliente.correo}
+                        </li>
+                        <li
+                            className="navbar-shopping-cart"
+                            onClick={() => setToggleOrders(!toggleOrders)}
+                        >
+                            <img src={shopingCar} alt="shopping cart" />
+                            {state.cart.length > 0 ? <div>{state.cart.length}</div> : null}
+                        </li>
+                    </ul>
+                </div>
 
-            {!!toggleOrders && <MyOrder />}
-        </nav>
-    );
+                {!!toggleOrders && <MyOrder />}
+            </nav>
+        )
+    }
 };
 
 export default Header;

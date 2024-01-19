@@ -35,7 +35,8 @@ const MyOrder = () => {
 
                 {state.cliente.rol==1?(
                     <Link to={'/checkout'}> <button className="primary-button">Checkout</button></Link>
-                ):( <Link to={'/comprar'}> <button className="primary-button">Comprar</button></Link>)}
+                ):state.cliente.rol==2?( <Link to={'/comprar'}> <button className="primary-button">Comprar</button></Link>):
+                    (<div></div>)}
             </div>
         </aside>
     );
