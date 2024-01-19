@@ -28,7 +28,7 @@ const Header=()=>{
                 <div className="navbar-left">
                     <img src={logo} alt="logo" className="nav-logo" />
 
-                    <ul>
+                    {state.cliente.rol==1 && ( <ul>
                         <li>
                             <Link to="/home">All</Link>
                         </li>
@@ -37,7 +37,7 @@ const Header=()=>{
                                 <Link to={`/categoria/${categoria.id}`}>{categoria.nombre}</Link>
                             </li>
                         ))}
-                    </ul>
+                    </ul>)}
                 </div>
 
                 <div className="navbar-right">
